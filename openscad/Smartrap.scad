@@ -4,9 +4,10 @@
 
 //variabless
 base_z = 7;
-diam_rods = 8;
-diam_bearing_holder = 15;
-diam_filament = 1.75;
+radius_rods = 4;
+radius_M4 = 2.1;
+radius_bearing_holder = 7.5;
+radius_filament = 0.875;
 nema = 17;
 linear_system = "fishing_line";
 
@@ -19,7 +20,8 @@ module all()
 base_y();
 translate([0,50,0])
 base_center();
-
+translate([0,100,0])
+base_back();
 
 // parts
 module base_y()
@@ -30,9 +32,9 @@ module base_y()
 	translate([20,20,-1]) 
 		cube([42,10,10]);
 	translate([15,28,4]) rotate([90,0,0])
-		cylinder(h=20,r=2.1);
+		cylinder(h=20,r=radius_M4);
 	translate([65,28,4]) rotate([90,0,0])
-		cylinder(h=20,r=2.1);
+		cylinder(h=20,r=radius_M4);
 	}
 		
 module base_center()
@@ -42,11 +44,9 @@ module base_center()
 
 module base_back()
 	difference(){
-		miniround([100,60,base_z],2);
-	translate([10,-10,-1]) 
-		cube([80,25,10]); 
-	translate([15,28,4]) rotate([90,0,0])
-		cylinder(h=20,r=2.1);
+		miniround([60,10,base_z],2);
+	translate([15,12,4]) rotate([90,0,0])
+		cylinder(h=20,r=radius_M4);
 	}
 
 module plate_base()
