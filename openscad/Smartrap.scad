@@ -3,13 +3,16 @@
 // version 0.4.6 - 12/08/2013
 
 //variabless
-base_z = 7;
-radius_rods = 4;
-radius_M4 = 2.1;
-radius_bearing_holder = 7.5;
-radius_filament = 0.875;
-nema = 17;
-linear_system = "fishing_line";
+base_z = 7; // height of all plates
+rods_r = 4; // the radius of rods. we use diam 8 but ready to use d=6
+M4_bool_r = 2.1; // we can adjust the diam of holes for different printers
+bearing_holder_r = 7.5; // the holes for bearings on t=plates
+filament_r = 0.875; // 1,75  ready for 3mm
+nema = 17; // will be used to pass all with nema14
+nema_size = [42,42,42]; // 
+linear_system = "fishing_line"; // future option for belt, fishing,printed rail
+space_holes_electronics = 84; // adapt to different controlers. 
+
 
 
 // ---------  MAIN ----------
@@ -22,6 +25,14 @@ translate([0,50,0])
 base_center();
 translate([0,100,0])
 base_back();
+translate([0,100,42])
+plate_base();
+translate([0,0,42])
+plate_y();
+translate([0,100,100])
+plate_x();
+translate([0,0,100])
+xend_jhead();
 
 // parts
 module base_y()
@@ -32,9 +43,9 @@ module base_y()
 	translate([20,20,-1]) 
 		cube([42,10,10]);
 	translate([15,28,4]) rotate([90,0,0])
-		cylinder(h=20,r=radius_M4);
+		cylinder(h=20,r=M4_bool_r);
 	translate([65,28,4]) rotate([90,0,0])
-		cylinder(h=20,r=radius_M4);
+		cylinder(h=20,r=M4_bool_r);
 	}
 		
 module base_center()
@@ -46,7 +57,7 @@ module base_back()
 	difference(){
 		miniround([60,10,base_z],2);
 	translate([15,12,4]) rotate([90,0,0])
-		cylinder(h=20,r=radius_M4);
+		cylinder(h=20,r=M4_bool_r);
 	}
 
 module plate_base()
