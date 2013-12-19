@@ -6,7 +6,9 @@
 base_z = 7; // height of all plates
 rods_r = 4; // the radius of rods. we use diam 8 but ready to use d=6
 M4_bool_r = 2.1; // we can adjust the diam of holes for different printers
-bearing_holder_r = 7.5; // the holes for bearings on t=plates
+bearing_holder_r = 7.5; // the holes for bearings on plates
+bearing_holder_l = 24;
+space_bet_holders = 10;
 filament_r = 0.875; // 1,75  ready for 3mm
 nema = 17; // will be used to pass all with nema14
 nema_size = [42,42,42]; // 
@@ -27,7 +29,7 @@ translate([0,100,0])
 base_back();
 translate([0,100,42])
 plate_base();
-translate([0,0,42])
+translate([20,0,42])
 plate_y();
 translate([0,100,100])
 plate_x();
@@ -63,35 +65,45 @@ module base_back()
 module plate_base()
 	difference(){
 		miniround([100,60,base_z],2);
-	translate([10,-10,-1]) 
-		cube([80,25,10]); 
-	translate([15,28,4]) rotate([90,0,0])
-		cylinder(h=20,r=2.1);
+	translate([10,10,(bearing_holder_r*2)-2]) 
+	rotate([0,90,0])
+		cylinder(h=bearing_holder_l,r=bearing_holder_r);
+	translate([bearing_holder_l+space_bet_holders*2,10,(bearing_holder_r*2)-2]) 
+	rotate([0,90,0])
+		cylinder(h=bearing_holder_l,r=bearing_holder_r);
 	}
 
 module plate_x()
 	difference(){
-		miniround([100,60,base_z],2);
-	translate([10,-10,-1]) 
-		cube([80,25,10]); 
-	translate([15,28,4]) rotate([90,0,0])
-		cylinder(h=20,r=2.1);
+		miniround([100,80,base_z],2);
+	translate([20,bearing_holder_l+space_bet_holders,(bearing_holder_r*2)-2]) 
+	rotate([90,0,0])
+		cylinder(h=bearing_holder_l,r=bearing_holder_r);
+	translate([20,(bearing_holder_l+space_bet_holders)*2,(bearing_holder_r*2)-2]) 
+	rotate([90,0,0])
+		cylinder(h=bearing_holder_l,r=bearing_holder_r);
+	translate([70,bearing_holder_l+space_bet_holders,(bearing_holder_r*2)-2]) 
+	rotate([90,0,0])
+		cylinder(h=bearing_holder_l,r=bearing_holder_r);
+	translate([70,(bearing_holder_l+space_bet_holders)*2,(bearing_holder_r*2)-2]) 
+	rotate([90,0,0])
+		cylinder(h=bearing_holder_l,r=bearing_holder_r);
 	}
 
 module plate_y()
 	difference(){
-		miniround([100,60,base_z],2);
-	translate([10,-10,-1]) 
-		cube([80,25,10]); 
-	translate([15,28,4]) rotate([90,0,0])
-		cylinder(h=20,r=2.1);
+		miniround([60,40,base_z],2);
+	translate([10,10,(bearing_holder_r*2)-2]) 
+	rotate([0,90,0])
+		cylinder(h=bearing_holder_l,r=bearing_holder_r);
+	translate([44,10,(bearing_holder_r*2)-2]) 
+	rotate([0,90,0])
+		cylinder(h=bearing_holder_l,r=bearing_holder_r);
 	}
 
 module xend_jhead()
 	difference(){
-		miniround([100,60,base_z],2);
-	translate([10,-10,-1]) 
-		cube([80,25,10]); 
+		miniround([60,22,30]);
 	translate([15,28,4]) rotate([90,0,0])
 		cylinder(h=20,r=2.1);
 	}
