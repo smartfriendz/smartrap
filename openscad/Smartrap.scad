@@ -22,7 +22,7 @@ xrods_spaceX = 42.825;
 all();
 
 // draw all
-module all()
+module all(){
 	base_center();
 	translate([0,-50,0])
 	base_y();
@@ -34,7 +34,7 @@ module all()
 	plate_x();
 	translate([0,0,100])
 	xend_jhead();
-
+}
 // parts
 module base_y()
 	difference(){		
@@ -57,9 +57,9 @@ module base_center()
 		translate([border+zrods_spaceX,border,-1])
 		zrod();
 		translate([border,border*2,3])
-		nema();
+		nema_bool();
 		translate([border+42+border,border*2,3])
-		nema();
+		nema_bool();
 		
 	}
 /*
@@ -200,10 +200,20 @@ cylinder(r=radius);
 }
 }
 
-module nema()
+module nema_bool()
 {
  if(nema==17){
-	cube(42);
+	
+	union(){
+		cube(42);
+		translate([21,21,40])
+		//rotate([0,90,0])
+		cylinder(r=11,h=20);
+		translate([5.5,5.5,40]) cylinder(r=1.6,h=20);
+		translate([36.5,5.5,40]) cylinder(r=1.6,h=20);
+		translate([5.5,36.5,40]) cylinder(r=1.6,h=20);
+		translate([36.5,36.5,40]) cylinder(r=1.6,h=20);
+		}
  }
  if(nema==14){
  cube(35);
