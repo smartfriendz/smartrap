@@ -332,7 +332,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   // these are the offsets to the prob relative to the extruder tip (Hotend - Probe)
   #define X_PROBE_OFFSET_FROM_EXTRUDER -10
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 22
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -8.9
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -9.5
 
   #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
@@ -387,7 +387,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // default settings
 
-#define DEFAULT_AXIS_STEPS_PER_UNIT  {195,195,4000,85}  // default steps per unit for Ultimaker
+#define DEFAULT_AXIS_STEPS_PER_UNIT  {195,195,7200,85}  // default steps per unit for Ultimaker
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
 
