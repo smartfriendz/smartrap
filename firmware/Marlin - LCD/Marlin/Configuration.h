@@ -332,10 +332,10 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   // these are the offsets to the prob relative to the extruder tip (Hotend - Probe)
   #define X_PROBE_OFFSET_FROM_EXTRUDER -10
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 22
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -11.2 // prod version with servo behind
-  //#define Z_PROBE_OFFSET_FROM_EXTRUDER -8.3 // first version. at home
-  #define Z_PROBE_DELTA_X 0
-  #define Z_RAISE_BEFORE_HOMING 10       // (in mm) Raise Z before homing (G28) for Probe Clearance.
+  //#define Z_PROBE_OFFSET_FROM_EXTRUDER -7.8 // prod version with servo behind
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -8.3 // first version. at home
+
+  #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
     
   #define XY_TRAVEL_SPEED 6000         // X and Y axis travel speed between probes, in mm/min
@@ -445,7 +445,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // The RepRapDiscount Smart Controller (white PCB)
 // http://reprap.org/wiki/RepRapDiscount_Smart_Controller
-//#define REPRAP_DISCOUNT_SMART_CONTROLLER
+#define REPRAP_DISCOUNT_SMART_CONTROLLER
 
 // The GADGETS3D G3D LCD/SD Controller (blue PCB)
 // http://reprap.org/wiki/RAMPS_1.3/1.4_GADGETS3D_Shield_with_Panel
@@ -632,9 +632,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // Use M206 command to correct for switch height offset to actual nozzle height. Store that setting with M500.
 //
 #define SERVO_ENDSTOPS {-1, -1, 0} // Servo index for X, Y, Z. Disable with -1
-//#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 145,40} // X,Y,Z Axis Extend and Retract angles  POLOLU ( outside retract)!!
-#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 75,10} // aliexpress. (inside retract);
-#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 35,100} // pololu. (inside retract) inverted!!;
+#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 145,40} // X,Y,Z Axis Extend and Retract angles  POLOLU ( outside retract)!!
+//#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 75,10} // aliexpress. (inside retract);
 #include "Configuration_adv.h" 
 #include "thermistortables.h"
 

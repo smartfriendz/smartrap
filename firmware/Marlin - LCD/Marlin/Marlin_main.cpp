@@ -1363,7 +1363,7 @@ void process_commands()
 
             engage_z_probe();   // Engage Z Servo endstop if available
             run_z_probe();
-            current_position[Z_AXIS]+=Z_PROBE_DELTA_X; // hack smartfriendz . we compensate x axis force bending here.
+            current_position[Z_AXIS]+=0.3f; // hack smartfriendz . we compensate x axis force bending here.
             float z_at_xRight_yFront = current_position[Z_AXIS];
             retract_z_probe(); // Retract Z Servo endstop if available
             
@@ -1384,7 +1384,7 @@ void process_commands()
             // The following code correct the Z height difference from z-probe position and hotend tip position.
             // The Z height on homing is measured by Z-Probe, but the probe is quite far from the hotend. 
             // When the bed is uneven, this height must be corrected.
-            real_z = (float(st_get_position(Z_AXIS))/axis_steps_per_unit[Z_AXIS])+Z_PROBE_DELTA_X;  //get the real Z (since the auto bed leveling is already correcting the plane)
+            real_z = (float(st_get_position(Z_AXIS))/axis_steps_per_unit[Z_AXIS])+0.3f;  //get the real Z (since the auto bed leveling is already correcting the plane)
             x_tmp = current_position[X_AXIS] + X_PROBE_OFFSET_FROM_EXTRUDER;
             y_tmp = current_position[Y_AXIS] + Y_PROBE_OFFSET_FROM_EXTRUDER;
             z_tmp = current_position[Z_AXIS];
