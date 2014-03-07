@@ -633,7 +633,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 //
 #define SERVO_ENDSTOPS {-1, -1, 0} // Servo index for X, Y, Z. Disable with -1
 //#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 145,40} // X,Y,Z Axis Extend and Retract angles  POLOLU ( outside retract)!!
-#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 75,10} // aliexpress. (inside retract);
+//#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 75,10} // aliexpress. (inside retract);
 #define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 35,100} // pololu. (inside retract) inverted!!;
 #include "Configuration_adv.h" 
 #include "thermistortables.h"
