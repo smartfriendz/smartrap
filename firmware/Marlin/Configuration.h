@@ -25,7 +25,7 @@
 
 // This determines the communication speed of the printer
 // This determines the communication speed of the printer
-#define BAUDRATE 250000
+#define BAUDRATE 115000 //smartrap: down to 115k for linux
 
 // This enables the serial port associated to the Bluetooth interface
 //#define BTENABLED              // Enable BT interface on AT90USB devices
@@ -121,7 +121,7 @@
 // 52 is 200k thermistor - ATC Semitec 204GT-2 (1k pullup)
 // 55 is 100k thermistor - ATC Semitec 104GT-2 (Used in ParCan & J-Head) (1k pullup)
 
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 1 // smartrap : 
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_BED 1
@@ -154,12 +154,12 @@
 // If your bed has low resistance e.g. .6 ohm and throws the fuse you can duty cycle it to reduce the
 // average current. The value should be an integer and the heat bed will be turned on for 1 interval of
 // HEATER_BED_DUTY_CYCLE_DIVIDER intervals.
-//#define HEATER_BED_DUTY_CYCLE_DIVIDER 4
+#define HEATER_BED_DUTY_CYCLE_DIVIDER 4
 
 // PID settings:
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define BANG_MAX 200 // limits current to nozzle while in bang-bang mode; 255=full current
+#define BANG_MAX 200 // limits current to nozzle while in bang-bang mode; 255=full current 
 #define PID_MAX 200 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #ifdef PIDTEMP
   //#define PID_DEBUG // Sends debug data to the serial port.
@@ -205,7 +205,7 @@
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
 // setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
 // so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
-#define MAX_BED_POWER 220 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER 80 // limits duty cycle to bed; 255=full current
 
 #ifdef PIDTEMPBED
 //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
@@ -257,15 +257,15 @@
 #ifdef ENDSTOPPULLUPS
   #define ENDSTOPPULLUP_XMAX
   #define ENDSTOPPULLUP_YMAX
-  //#define ENDSTOPPULLUP_ZMAX
+  //#define ENDSTOPPULLUP_ZMAX // smartrap : we have the servo on this pin.
   #define ENDSTOPPULLUP_XMIN
   #define ENDSTOPPULLUP_YMIN
   #define ENDSTOPPULLUP_ZMIN
 #endif
 
 // The pullups are needed if you directly connect a mechanical endswitch between the signal and ground pins.
-const bool X_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Y_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+const bool X_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop. smartrap: can be inverted depends of fishingline mounting
+const bool Y_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.smartrap: can be inverted depends of fishingline mounting
 const bool Z_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
 const bool X_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
 const bool Y_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
@@ -319,36 +319,35 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define Z_MAX_LENGTH (Z_MAX_POS - Z_MIN_POS)
 //============================= Bed Auto Leveling ===========================
 
-#define ENABLE_AUTO_BED_LEVELING // Delete the comment to enable (remove // at the start of the line)
+#define ENABLE_AUTO_BED_LEVELING // Delete the comment to enable (remove // at the start of the line) // smartrap : uncomment
 
 #ifdef ENABLE_AUTO_BED_LEVELING
 
-  // these are the positions on the bed to do the probing
-  #define LEFT_PROBE_BED_POSITION 25
+  // these are the positions on the bed to do the probing. smartrap : we define safe position
+  #define LEFT_PROBE_BED_POSITION 25 
   #define RIGHT_PROBE_BED_POSITION 100
   #define BACK_PROBE_BED_POSITION 100
   #define FRONT_PROBE_BED_POSITION 25
 
-  // these are the offsets to the prob relative to the extruder tip (Hotend - Probe)
+  // these are the offsets to the prob relative to the extruder tip (Hotend - Probe) : smartrap : 
   #define X_PROBE_OFFSET_FROM_EXTRUDER -10
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 22
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -12.7 // prod version with servo behind
-  //#define Z_PROBE_OFFSET_FROM_EXTRUDER -8.3 // first version. at home
-  #define Z_PROBE_DELTA_X 0
-  #define Z_RAISE_BEFORE_HOMING 10       // (in mm) Raise Z before homing (G28) for Probe Clearance.
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -8.3 // smartrap: basic position. will certainly change on each assembly.
+  #define Z_PROBE_DELTA_X 0.3 // hack smartrap : from design, the mesure of Z when z extended bring an error between mesurement and print. we correct here.
+  #define Z_RAISE_BEFORE_HOMING 15       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
     
   #define XY_TRAVEL_SPEED 6000         // X and Y axis travel speed between probes, in mm/min
   
   #define Z_RAISE_BEFORE_PROBING 15    //How much the extruder will be raised before traveling to the first probing point.
-  #define Z_RAISE_BETWEEN_PROBINGS 10  //How much the extruder will be raised when traveling from between next probing points
+  #define Z_RAISE_BETWEEN_PROBINGS 15  //How much the extruder will be raised when traveling from between next probing points
 
 
   //If defined, the Probe servo will be turned on only during movement and then turned off to avoid jerk
   //The value is the delay to turn the servo off after powered on - depends on the servo speed; 300ms is good value, but you can try lower it.
   // You MUST HAVE the SERVO_ENDSTOPS defined to use here a value higher than zero otherwise your code will not compile.
 
-  #define PROBE_SERVO_DEACTIVATION_DELAY 1500  
+  #define PROBE_SERVO_DEACTIVATION_DELAY 1000  // smartrap : 
 
 
 //If you have enabled the Bed Auto Levelling and are using the same Z Probe for Z Homing, 
@@ -388,7 +387,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // default settings
 
-#define DEFAULT_AXIS_STEPS_PER_UNIT  {191,191,3700,170}  // default steps per unit for Ultimaker
+#define DEFAULT_AXIS_STEPS_PER_UNIT  {191,191,3700,85}  // smartrap : version 0.9 deg - 1/8 ( 2 jumpers only under driver)
+//#define DEFAULT_AXIS_STEPS_PER_UNIT  {181,181,4000,85}  // smartrap version 1.8 deg - 1/16
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
 
@@ -624,7 +624,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // leaving it undefined or defining as 0 will disable the servo subsystem
 // If unsure, leave commented / disabled
 //
-#define NUM_SERVOS 1 // Servo index starts with 0 for M280 command
+#define NUM_SERVOS 1 // Servo index starts with 0 for M280 command : smartrap : uncomment
 
 // Servo Endstops
 //
@@ -632,9 +632,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // Use M206 command to correct for switch height offset to actual nozzle height. Store that setting with M500.
 //
 #define SERVO_ENDSTOPS {-1, -1, 0} // Servo index for X, Y, Z. Disable with -1
-//#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 145,40} // X,Y,Z Axis Extend and Retract angles  POLOLU ( outside retract)!!
-//#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 75,10} // aliexpress. (inside retract);
-#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 35,100} // pololu. (inside retract) inverted!!;
+//#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 75,10} // smartrap : servo light blue;
+#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 35,100} // smartrap : servo pololu. dark blue;
 #include "Configuration_adv.h" 
 #include "thermistortables.h"
 
