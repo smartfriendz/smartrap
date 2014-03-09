@@ -1611,6 +1611,16 @@ void process_commands()
   {
     switch( (int)code_value() )
     {
+    case 555:
+    if(code_seen('Z'))
+    {
+      zprobe_zoffset = code_value() ;
+      SERIAL_PROTOCOLPGM(" Zprobe offset from extruder is now: ");
+      SERIAL_PROTOCOL(zprobe_zoffset);
+      SERIAL_PROTOCOLPGM(" to keep it for next start, do a M500 (store eeprom)");
+
+    }
+    break;
 #ifdef ULTIPANEL
     case 0: // M0 - Unconditional stop - Wait for user button press on LCD
     case 1: // M1 - Conditional stop - Wait for user button press on LCD
