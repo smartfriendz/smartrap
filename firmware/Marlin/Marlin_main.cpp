@@ -1487,7 +1487,7 @@ void process_commands()
                 if (probePointCounter == 0)
                 {
                   // raise before probing
-                  z_before = Z_RAISE_BEFORE_PROBING;
+                  z_before = current_position[Z_AXIS] + Z_RAISE_BEFORE_PROBING;
                 } else
                 {
                   // raise extruder
@@ -1526,7 +1526,7 @@ void process_commands()
 
             // Probe at 3 arbitrary points
             // probe 1
-            float z_at_pt_1 = probe_pt(ABL_PROBE_PT_1_X, ABL_PROBE_PT_1_Y, Z_RAISE_BEFORE_PROBING);
+            float z_at_pt_1 = probe_pt(ABL_PROBE_PT_1_X, ABL_PROBE_PT_1_Y, current_position[Z_AXIS] + Z_RAISE_BEFORE_PROBING);
 
             // probe 2
             float z_at_pt_2 = probe_pt(ABL_PROBE_PT_2_X, ABL_PROBE_PT_2_Y, current_position[Z_AXIS] + Z_RAISE_BETWEEN_PROBINGS);
@@ -1615,9 +1615,9 @@ void process_commands()
     if(code_seen('Z'))
     {
       zprobe_zoffset = code_value() ;
-      SERIAL_PROTOCOLPGM(" Zprobe offset from extruder is now: ");
+      SERIAL_PROTOCOLPGM("echo: Zprobe offset from extruder is now: ");
       SERIAL_PROTOCOL(zprobe_zoffset);
-      SERIAL_PROTOCOLPGM(" to keep it for next start, do a M500 (store eeprom)");
+      SERIAL_PROTOCOLPGM("\ntip: to keep it for next start, do a M500 (store eeprom)");
 
     }
     break;

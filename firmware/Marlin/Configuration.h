@@ -303,7 +303,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DISABLE_E false // For all extruders
 
 #define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
-#define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
+#define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
 #define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
 #define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
@@ -347,7 +347,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 //    Probe 3 arbitrary points on the bed (that aren't colinear)
 //    You must specify the X & Y coordinates of all 3 points
 
-  //#define AUTO_BED_LEVELING_GRID
+  #define AUTO_BED_LEVELING_GRID
   // with AUTO_BED_LEVELING_GRID, the bed is sampled in a
   // AUTO_BED_LEVELING_GRID_POINTSxAUTO_BED_LEVELING_GRID_POINTS grid
   // and least squares solution is calculated
@@ -382,15 +382,15 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   // these are the offsets to the probe relative to the extruder tip (Hotend - Probe)
   #define X_PROBE_OFFSET_FROM_EXTRUDER -10
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 22
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -8.3
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.4 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -7
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
 
   #define Z_RAISE_BEFORE_HOMING 15       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
 
   #define XY_TRAVEL_SPEED 6000         // X and Y axis travel speed between probes, in mm/min
 
-  #define Z_RAISE_BEFORE_PROBING 15    //How much the extruder will be raised before traveling to the first probing point.
+  #define Z_RAISE_BEFORE_PROBING 10    //How much the extruder will be raised before traveling to the first probing point.
   #define Z_RAISE_BETWEEN_PROBINGS 15  //How much the extruder will be raised when traveling from between next probing points
 
 
@@ -438,8 +438,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // default settings
 
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   {382,382,7400,170}  // smartrap : version 0.9 deg. 1/16
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {181,181,4000,85}  // smartrap : version 1.8deg
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {382,382,7400,170}  // smartrap : version 0.9 deg. 1/16
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   {181,181,4000,85}  // smartrap : version 1.8deg
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
@@ -702,9 +702,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 //
 #define SERVO_ENDSTOPS {-1, -1, 0} // Servo index for X, Y, Z. Disable with -1
 //smartrap : version pololu servo (dark blue)
-//#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 35,100} // X,Y,Z Axis Extend and Retract angles
+#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 35,100} // X,Y,Z Axis Extend and Retract angles
 //smartrap : version chinese 3.7g (light blue)
-#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 75,10} // X,Y,Z Axis Extend and Retract angles
+//#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 75,10} // X,Y,Z Axis Extend and Retract angles
 
 #include "Configuration_adv.h"
 #include "thermistortables.h"
