@@ -1000,7 +1000,12 @@ static float probe_pt(float x, float y, float z_before) {
   engage_z_probe();   // Engage Z Servo endstop if available
   run_z_probe();
   float measured_z = current_position[Z_AXIS];
-  retract_z_probe();
+
+  
+    do_blocking_move_to(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]+Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT);
+    retract_z_probe();
+
+  
 
   SERIAL_PROTOCOLPGM(MSG_BED);
   SERIAL_PROTOCOLPGM(" x: ");
@@ -1484,6 +1489,7 @@ void process_commands()
               for (int xCount=0; xCount < AUTO_BED_LEVELING_GRID_POINTS; xCount++)
               {
                 float z_before;
+                
                 if (probePointCounter == 0)
                 {
                   // raise before probing
@@ -1493,7 +1499,7 @@ void process_commands()
                   // raise extruder
                   z_before = current_position[Z_AXIS] + Z_RAISE_BETWEEN_PROBINGS;
                 }
-
+                
                 float measured_z = probe_pt(xProbe, yProbe, z_before);
 
                 eqnBVector[probePointCounter] = measured_z;

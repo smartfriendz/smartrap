@@ -1,6 +1,16 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
+
+
+// ----- Smartrap easy config :
+ #define useEEPROM // just place it here so we don't look in all config file
+// #define motors09 // version 0.9 degres motors. change steps
+// #define servoPololu // version with pololu servos. others are inverted angles ?!?!
+ #define LCDreprapdiscount // just place here so we don't look in all config file.
+
+
+
 // This configuration file contains the basic settings.
 // Advanced settings can be found in Configuration_adv.h
 // BASIC SETTINGS: select your board type, temperature sensor type, axis scaling, and endstop configuration
@@ -16,7 +26,7 @@
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
-#define STRING_CONFIG_H_AUTHOR "(smartfriendz, smartrap1.03)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(smartfriendz, smartrap1.04)" // Who made the changes.
 
 // SERIAL_PORT selects which serial port should be used for communication with the host.
 // This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -303,7 +313,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DISABLE_E false // For all extruders
 
 #define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
-#define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
+#define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
 #define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
 #define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
@@ -390,9 +400,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
   #define XY_TRAVEL_SPEED 6000         // X and Y axis travel speed between probes, in mm/min
 
-  #define Z_RAISE_BEFORE_PROBING 10    //How much the extruder will be raised before traveling to the first probing point.
-  #define Z_RAISE_BETWEEN_PROBINGS 15  //How much the extruder will be raised when traveling from between next probing points
-
+  #define Z_RAISE_BEFORE_PROBING 12    //How much the extruder will be raised before traveling to the first probing point.
+  #define Z_RAISE_BETWEEN_PROBINGS 0  //How much the extruder will be raised when traveling from between next probing points
+  #define Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT  10 // smartrap : this happend just after probing point and before servo comes back ( to prevent servo to tap on the bed)
 
   //If defined, the Probe servo will be turned on only during movement and then turned off to avoid jerk
   //The value is the delay to turn the servo off after powered on - depends on the servo speed; 300ms is good value, but you can try lower it.
@@ -436,10 +446,12 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define NUM_AXIS 4 // The axis order in all axis related arrays is X, Y, Z, E
 #define HOMING_FEEDRATE {50*60, 50*60, 4*60, 0}  // set the homing speeds (mm/min)
 
-// default settings
-
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {382,382,7400,170}  // smartrap : version 0.9 deg. 1/16
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   {181,181,4000,85}  // smartrap : version 1.8deg
+// default settings - smartrap: uses define on top for diferent motors config
+#ifdef motors09
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   {382,382,7400,170}  // smartrap : version 0.9 deg. 1/16 {382,382,7400,170}
+#else
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   {181,181,4000,85}  // smartrap : version 1.8degv{181,181,4000,85}
+#endif
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
@@ -466,12 +478,13 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // M500 - stores parameters in EEPROM
 // M501 - reads parameters from EEPROM (if you need reset them after you changed them temporarily).
 // M502 - reverts to the default "factory settings".  You still need to store them in EEPROM afterwards if you want to.
-//define this to enable EEPROM support
-#define EEPROM_SETTINGS
-//to disable EEPROM Serial responses and decrease program space by ~1700 byte: comment this out:
-// please keep turned on if you can.
-#define EEPROM_CHITCHAT
-
+#ifdef useEEPROM
+  //define this to enable EEPROM support
+  #define EEPROM_SETTINGS
+  //to disable EEPROM Serial responses and decrease program space by ~1700 byte: comment this out:
+  // please keep turned on if you can.
+  #define EEPROM_CHITCHAT
+#endif
 // Preheat Constants
 #define PLA_PREHEAT_HOTEND_TEMP 180
 #define PLA_PREHEAT_HPB_TEMP 70
@@ -499,8 +512,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // The RepRapDiscount Smart Controller (white PCB)
 // http://reprap.org/wiki/RepRapDiscount_Smart_Controller
+#ifdef LCDreprapdiscount
 #define REPRAP_DISCOUNT_SMART_CONTROLLER
-
+#endif
 // The GADGETS3D G3D LCD/SD Controller (blue PCB)
 // http://reprap.org/wiki/RAMPS_1.3/1.4_GADGETS3D_Shield_with_Panel
 //#define G3D_PANEL
@@ -701,10 +715,13 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // Use M206 command to correct for switch height offset to actual nozzle height. Store that setting with M500.
 //
 #define SERVO_ENDSTOPS {-1, -1, 0} // Servo index for X, Y, Z. Disable with -1
+#ifdef servoPololu
 //smartrap : version pololu servo (dark blue)
 #define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 35,100} // X,Y,Z Axis Extend and Retract angles
+#else
 //smartrap : version chinese 3.7g (light blue)
-//#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 75,10} // X,Y,Z Axis Extend and Retract angles
+#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 75,10} // X,Y,Z Axis Extend and Retract angles
+#endif
 
 #include "Configuration_adv.h"
 #include "thermistortables.h"

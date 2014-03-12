@@ -38,7 +38,7 @@
 	#ifdef CUSTOM_MENDEL_NAME
 		#define MACHINE_NAME CUSTOM_MENDEL_NAME
 	#else
-		#define MACHINE_NAME "Smartrap 1.02"
+		#define MACHINE_NAME "Smartrap 1.04"
 	#endif
 
 // Default firmware set to Mendel
