@@ -1002,9 +1002,9 @@ static float probe_pt(float x, float y, float z_before) {
   float measured_z = current_position[Z_AXIS];
 
   
-    do_blocking_move_to(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]+Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT);
+    //do_blocking_move_to(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]+Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT);
     retract_z_probe();
-
+    //do_blocking_move_to(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]-Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT);
   
 
   SERIAL_PROTOCOLPGM(MSG_BED);

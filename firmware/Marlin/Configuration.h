@@ -401,8 +401,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #define XY_TRAVEL_SPEED 6000         // X and Y axis travel speed between probes, in mm/min
 
   #define Z_RAISE_BEFORE_PROBING 12    //How much the extruder will be raised before traveling to the first probing point.
-  #define Z_RAISE_BETWEEN_PROBINGS 0  //How much the extruder will be raised when traveling from between next probing points
-  #define Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT  10 // smartrap : this happend just after probing point and before servo comes back ( to prevent servo to tap on the bed)
+  #define Z_RAISE_BETWEEN_PROBINGS 10  //How much the extruder will be raised when traveling from between next probing points
+  #define Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT  5 // smartrap : this happend just after probing point and before servo comes back ( to prevent servo to tap on the bed)
 
   //If defined, the Probe servo will be turned on only during movement and then turned off to avoid jerk
   //The value is the delay to turn the servo off after powered on - depends on the servo speed; 300ms is good value, but you can try lower it.
