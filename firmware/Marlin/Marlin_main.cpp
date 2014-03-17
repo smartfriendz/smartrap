@@ -898,7 +898,7 @@ static void run_z_probe() {
     feedrate = homing_feedrate[Z_AXIS];
 
     // move down until you find the bed
-    float zPosition = -10;
+    float zPosition = -15;
     plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], zPosition, current_position[E_AXIS], feedrate/60, active_extruder);
     st_synchronize();
 
@@ -1618,13 +1618,17 @@ void process_commands()
     switch( (int)code_value() )
     {
     case 555:
-    if(code_seen('Z'))
     {
-      zprobe_zoffset = code_value() ;
-      SERIAL_PROTOCOLPGM("echo: Zprobe offset from extruder is now: ");
-      SERIAL_PROTOCOL(zprobe_zoffset);
-      SERIAL_PROTOCOLPGM("\ntip: to keep it for next start, do a M500 (store eeprom)");
-
+      if(code_seen('Z'))
+      {
+        zprobe_zoffset = code_value() ;
+        SERIAL_ECHOLN("echo: Zprobe offset from extruder is now: ");
+        SERIAL_ECHOLN(zprobe_zoffset);
+  
+      }
+      else{
+        SERIAL_ECHOLN(zprobe_zoffset);
+      }
     }
     break;
 #ifdef ULTIPANEL
@@ -2705,6 +2709,7 @@ void process_commands()
     }
     break;
     #endif
+    
     #ifdef FILAMENTCHANGEENABLE
     case 600: //Pause for filament change X[pos] Y[pos] Z[relative lift] E[initial retract] L[later retract distance for removal]
     {

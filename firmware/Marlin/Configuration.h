@@ -4,12 +4,18 @@
 
 
 // ----- Smartrap easy config :
+
+
  #define useEEPROM // just place it here so we don't look in all config file
-// #define motors09 // version 0.9 degres motors. change steps
-// #define servoPololu // version with pololu servos. others are inverted angles ?!?!
+ #define servoPololu // version with pololu servos. others are inverted angles ?!?!
  #define LCDreprapdiscount // just place here so we don't look in all config file.
+ 
+ // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
+ //#define motors09 // version 0.9 degres motors. change steps
+ //#define motors1848 // version motors 1.8 degres, 48mm long
+ #define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
 
-
+// ------ end smartrap easy config
 
 // This configuration file contains the basic settings.
 // Advanced settings can be found in Configuration_adv.h
@@ -26,7 +32,7 @@
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
-#define STRING_CONFIG_H_AUTHOR "(smartfriendz, smartrap1.04)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(smartfriendz, smartrap1.05)" // Who made the changes.
 
 // SERIAL_PORT selects which serial port should be used for communication with the host.
 // This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -401,7 +407,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #define XY_TRAVEL_SPEED 6000         // X and Y axis travel speed between probes, in mm/min
 
   #define Z_RAISE_BEFORE_PROBING 12    //How much the extruder will be raised before traveling to the first probing point.
-  #define Z_RAISE_BETWEEN_PROBINGS 10  //How much the extruder will be raised when traveling from between next probing points
+  #define Z_RAISE_BETWEEN_PROBINGS 12  //How much the extruder will be raised when traveling from between next probing points
   #define Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT  5 // smartrap : this happend just after probing point and before servo comes back ( to prevent servo to tap on the bed)
 
   //If defined, the Probe servo will be turned on only during movement and then turned off to avoid jerk
@@ -448,10 +454,15 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // default settings - smartrap: uses define on top for diferent motors config
 #ifdef motors09
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   {382,382,7400,170}  // smartrap : version 0.9 deg. 1/16 {382,382,7400,170}
-#else
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   {181,181,4000,85}  // smartrap : version 1.8degv{181,181,4000,85}
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   {394,394,7400,170}  // smartrap : version 0.9 deg. 1/16 {382,382,7400,170}
 #endif
+#ifdef motors1848
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   {194,194,4000,85}  // smartrap : version 1.8degv{194,194,4000,85}
+#endif
+#ifdef motors1840
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {97,97,4000,80}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+#endif
+
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
