@@ -6,9 +6,9 @@
 // ----- Smartrap easy config :
 
 
- //#define useEEPROM // just place it here so we don't look in all config file
+ #define useEEPROM // just place it here so we don't look in all config file
  #define servoPololu // version with pololu servos. others are inverted angles ?!?!
- //#define LCDreprapdiscount // just place here so we don't look in all config file.
+ #define LCDreprapdiscount // just place here so we don't look in all config file.
  
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
  //#define motors09 // version 0.9 degres motors. change steps
@@ -335,11 +335,11 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
 
 // Travel limits after homing
-#define X_MAX_POS 130
+#define X_MAX_POS 150
 #define X_MIN_POS 0
-#define Y_MAX_POS 130
+#define Y_MAX_POS 2000
 #define Y_MIN_POS 0
-#define Z_MAX_POS 100
+#define Z_MAX_POS 130
 #define Z_MIN_POS 0
 
 #define X_MAX_LENGTH (X_MAX_POS - X_MIN_POS)
@@ -371,10 +371,10 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #ifdef AUTO_BED_LEVELING_GRID
 
     // set the rectangle in which to probe
-    #define LEFT_PROBE_BED_POSITION 30
-    #define RIGHT_PROBE_BED_POSITION 110
-    #define BACK_PROBE_BED_POSITION 110
-    #define FRONT_PROBE_BED_POSITION 30
+    #define LEFT_PROBE_BED_POSITION 10
+    #define RIGHT_PROBE_BED_POSITION 100
+    #define BACK_PROBE_BED_POSITION 150
+    #define FRONT_PROBE_BED_POSITION 10
 
      // set the number of grid points per dimension
      // I wouldn't see a reason to go above 3 (=9 probing points on the bed)
@@ -388,9 +388,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
       #define ABL_PROBE_PT_1_X 10
       #define ABL_PROBE_PT_1_Y 10
       #define ABL_PROBE_PT_2_X 10
-      #define ABL_PROBE_PT_2_Y 100
+      #define ABL_PROBE_PT_2_Y 140
       #define ABL_PROBE_PT_3_X 100
-      #define ABL_PROBE_PT_3_Y 55
+      #define ABL_PROBE_PT_3_Y 70
 
   #endif // AUTO_BED_LEVELING_GRID
 
@@ -398,8 +398,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   // these are the offsets to the probe relative to the extruder tip (Hotend - Probe)
   #define X_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER 1.4
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.5 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER 2
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
 
   #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
@@ -460,7 +460,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #define DEFAULT_AXIS_STEPS_PER_UNIT   {194,194,4000,85}  // smartrap : version 1.8degv{194,194,4000,85}
 #endif
 #ifdef motors1840
-   #define DEFAULT_AXIS_STEPS_PER_UNIT   {99,99,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {102,102,4000,83}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
 #endif
 
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 4, 25}    // (mm/sec)

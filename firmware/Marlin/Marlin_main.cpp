@@ -997,13 +997,13 @@ static float probe_pt(float x, float y, float z_before) {
   do_blocking_move_to(current_position[X_AXIS], current_position[Y_AXIS], z_before);
   do_blocking_move_to(x - X_PROBE_OFFSET_FROM_EXTRUDER, y - Y_PROBE_OFFSET_FROM_EXTRUDER, current_position[Z_AXIS]);
 
-  //engage_z_probe();   // Engage Z Servo endstop if available
+  engage_z_probe();   // Engage Z Servo endstop if available
   run_z_probe();
   float measured_z = current_position[Z_AXIS];
 
   
     //do_blocking_move_to(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]+Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT);
-    //retract_z_probe();
+    retract_z_probe();
     //do_blocking_move_to(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]-Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT);
   
 

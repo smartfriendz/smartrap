@@ -6,14 +6,14 @@
 // ----- Smartrap easy config :
 
 
- //#define useEEPROM // just place it here so we don't look in all config file
+ #define useEEPROM // just place it here so we don't look in all config file
  #define servoPololu // version with pololu servos. others are inverted angles ?!?!
  //#define LCDreprapdiscount // just place here so we don't look in all config file.
  
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
- //#define motors09 // version 0.9 degres motors. change steps
+ #define motors09 // version 0.9 degres motors. change steps
  //#define motors1848 // version motors 1.8 degres, 48mm long
- #define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
+ //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
 
 // ------ end smartrap easy config
 
