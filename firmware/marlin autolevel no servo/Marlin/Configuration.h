@@ -12,8 +12,8 @@
  
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
  //#define motors09 // version 0.9 degres motors. change steps
- //#define motors1848 // version motors 1.8 degres, 48mm long
- #define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
+ #define motors1848 // version motors 1.8 degres, 48mm long
+ //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
 
 // ------ end smartrap easy config
 
@@ -32,7 +32,7 @@
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
-#define STRING_CONFIG_H_AUTHOR "(smartfriendz, smartrap1.05)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(smartfriendz, smartrap1.06)" // Who made the changes.
 
 // SERIAL_PORT selects which serial port should be used for communication with the host.
 // This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -319,7 +319,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DISABLE_E false // For all extruders
 
 #define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true
-#define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
+#define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
 #define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
 #define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
@@ -337,7 +337,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // Travel limits after homing
 #define X_MAX_POS 150
 #define X_MIN_POS 0
-#define Y_MAX_POS 2000
+#define Y_MAX_POS 150
 #define Y_MIN_POS 0
 #define Z_MAX_POS 130
 #define Z_MIN_POS 0
@@ -399,7 +399,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #define X_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Z_PROBE_OFFSET_FROM_EXTRUDER 2
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.3 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
 
   #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
