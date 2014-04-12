@@ -12,8 +12,8 @@
  
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
  //#define motors09 // version 0.9 degres motors. change steps
- #define motors1848 // version motors 1.8 degres, 48mm long
- //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
+ //#define motors1848 // version motors 1.8 degres, 48mm long
+ #define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
 
 // ------ end smartrap easy config
 
@@ -319,7 +319,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DISABLE_E false // For all extruders
 
 #define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true
-#define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
+#define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
 #define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
 #define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
@@ -373,7 +373,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
     // set the rectangle in which to probe
     #define LEFT_PROBE_BED_POSITION 10
     #define RIGHT_PROBE_BED_POSITION 100
-    #define BACK_PROBE_BED_POSITION 150
+    #define BACK_PROBE_BED_POSITION 140
     #define FRONT_PROBE_BED_POSITION 10
 
      // set the number of grid points per dimension
