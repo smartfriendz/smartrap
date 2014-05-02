@@ -13,8 +13,8 @@
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
  //#define motors09 // version 0.9 degres motors. change steps
  //#define motors1848 // version motors 1.8 degres, 48mm long
- //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
-  #define motors1848rack // version motors 1.8 degres, 48mm long
+  #define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
+  //#define motors1848rack // version motors 1.8 degres, 48mm long
 // ------ end smartrap easy config
 
 // This configuration file contains the basic settings.
@@ -388,8 +388,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
       #define ABL_PROBE_PT_1_X 10
       #define ABL_PROBE_PT_1_Y 10
       #define ABL_PROBE_PT_2_X 10
-      #define ABL_PROBE_PT_2_Y 140
-      #define ABL_PROBE_PT_3_X 100
+      #define ABL_PROBE_PT_2_Y 130
+      #define ABL_PROBE_PT_3_X 90
       #define ABL_PROBE_PT_3_Y 70
 
   #endif // AUTO_BED_LEVELING_GRID
