@@ -13,8 +13,8 @@
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
  //#define motors09 // version 0.9 degres motors. change steps
  //#define motors1848 // version motors 1.8 degres, 48mm long
-  #define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
-  //#define motors1848rack // version motors 1.8 degres, 48mm long
+  //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
+  #define motors1848rack // version motors 1.8 degres, 48mm long
 // ------ end smartrap easy config
 
 // This configuration file contains the basic settings.
@@ -399,7 +399,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #define X_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Z_PROBE_OFFSET_FROM_EXTRUDER 2
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.3 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
 
   #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
@@ -463,7 +463,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
    #define DEFAULT_AXIS_STEPS_PER_UNIT   {102,102,4000,83}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
 #endif
 #ifdef motors1848rack
-   #define DEFAULT_AXIS_STEPS_PER_UNIT   {75.6,75.6,4000,83}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {77,77,4000,83}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
 #endif
 
 
