@@ -13,8 +13,9 @@
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
  //#define motors09 // version 0.9 degres motors. change steps
  //#define motors1848 // version motors 1.8 degres, 48mm long
-  //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
-  #define motors1848rack // version motors 1.8 degres, 48mm long
+ //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
+  #define motors18rack // version rack motors 1.8 degres
+ //#define motors09rack // version rack motors 0.9 degres
 // ------ end smartrap easy config
 
 // This configuration file contains the basic settings.
@@ -460,12 +461,14 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #define DEFAULT_AXIS_STEPS_PER_UNIT   {194,194,4000,85}  // smartrap : version 1.8degv{194,194,4000,85}
 #endif
 #ifdef motors1840
-   #define DEFAULT_AXIS_STEPS_PER_UNIT   {102,102,4000,83}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {102,102,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
 #endif
-#ifdef motors1848rack
-   #define DEFAULT_AXIS_STEPS_PER_UNIT   {77,77,4000,83}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+#ifdef motors18rack
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {77,77,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
 #endif
-
+#ifdef motors09rack
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {154,154,7400,170}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+#endif
 
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 4, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
