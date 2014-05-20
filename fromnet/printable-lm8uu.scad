@@ -1,7 +1,7 @@
 $fn=32;
 
 lm8uu_length = 24;
-lm8uu_id=7.2;
+lm8uu_id=5.2;
 lm8uu_od=15.0;
 
 id_clearance = 1;
