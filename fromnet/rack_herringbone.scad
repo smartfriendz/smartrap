@@ -11,10 +11,10 @@
 
 
 pi=3.1415926535897932384626433832795;
-innerRadius=2.6;//shaft radius, in mm
+innerRadius=2;//shaft radius, in mm
 borders=2;//how thick should the borders around the central "shaft" be, in mm
 diametralPitch=12;
-numberOfTeeth=29;
+numberOfTeeth=38;
 pressureAngle=20*pi/180;
 centerAngle=25;//angle at center of teeth
 
@@ -77,13 +77,16 @@ module rack(innerRadius,borders,P,N,PA,CA)
 	{
 	union()
 	{
-		difference()
+		/*difference()
 		{
 			support(supportL,supportW,supportSize,baseoffsetY);
 			rotate([90,90,0]) 
 			{cylinder(h=length+10,r=innerRadius,center=true,$fn=100);}
 		}
-
+		*/
+		{
+			support(supportL,supportW,supportSize,baseoffsetY);
+		}
 	
 		for (i = [0:N-1]) 
 		{

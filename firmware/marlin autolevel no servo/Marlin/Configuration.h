@@ -14,8 +14,8 @@
  //#define motors09 // version 0.9 degres motors. change steps
  //#define motors1848 // version motors 1.8 degres, 48mm long
  //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
-  #define motors18rack // version rack motors 1.8 degres
- //#define motors09rack // version rack motors 0.9 degres
+  //#define motors18rack // version rack motors 1.8 degres
+ #define motors09rack // version rack motors 0.9 degres
 // ------ end smartrap easy config
 
 // This configuration file contains the basic settings.
@@ -42,6 +42,7 @@
 
 // This determines the communication speed of the printer
 // This determines the communication speed of the printer
+//#define BAUDRATE 115200
 #define BAUDRATE 250000
 
 // This enables the serial port associated to the Bluetooth interface
@@ -319,8 +320,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DISABLE_Z false
 #define DISABLE_E false // For all extruders
 
-#define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true
-#define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
+#define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
+#define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
 #define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
 #define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
