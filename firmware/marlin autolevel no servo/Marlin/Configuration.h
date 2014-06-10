@@ -320,10 +320,10 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DISABLE_Z false
 #define DISABLE_E false // For all extruders
 
-#define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
+#define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true
 #define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
 #define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
-#define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
+#define INVERT_E0_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E2_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
 
@@ -401,7 +401,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #define X_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Z_PROBE_OFFSET_FROM_EXTRUDER 2
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.5 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.8 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
 
   #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
