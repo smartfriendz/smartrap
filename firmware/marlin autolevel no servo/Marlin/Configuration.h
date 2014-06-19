@@ -8,7 +8,7 @@
 
  #define useEEPROM // just place it here so we don't look in all config file
  #define servoPololu // version with pololu servos. others are inverted angles ?!?!
- #define LCDreprapdiscount // just place here so we don't look in all config file.
+ //#define LCDreprapdiscount // just place here so we don't look in all config file.
  
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
  //#define motors09 // version 0.9 degres motors. change steps
@@ -16,6 +16,8 @@
  //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
   #define motors18rack // version rack motors 1.8 degres
  //#define motors09rack // version rack motors 0.9 degres
+  //#define motors18gt2 // version rack motors 1.8 degres
+ //#define motors09gt2 // version rack motors 0.9 degres
 // ------ end smartrap easy config
 
 // This configuration file contains the basic settings.
@@ -321,7 +323,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DISABLE_E false // For all extruders
 
 #define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true
-#define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
+#define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
 #define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
 #define INVERT_E0_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
@@ -337,11 +339,11 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
 
 // Travel limits after homing
-#define X_MAX_POS 150
+#define X_MAX_POS 200
 #define X_MIN_POS 0
-#define Y_MAX_POS 150
+#define Y_MAX_POS 200
 #define Y_MIN_POS 0
-#define Z_MAX_POS 130
+#define Z_MAX_POS 160
 #define Z_MIN_POS 0
 
 #define X_MAX_LENGTH (X_MAX_POS - X_MIN_POS)
@@ -456,7 +458,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // default settings - smartrap: uses define on top for diferent motors config
 #ifdef motors09
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   {394,394,7400,170}  // smartrap : version 0.9 deg. 1/16 {382,382,7400,170}
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   {394,394,8000,170}  // smartrap : version 0.9 deg. 1/16 {382,382,7400,170}
 #endif
 #ifdef motors1848
   #define DEFAULT_AXIS_STEPS_PER_UNIT   {194,194,4000,85}  // smartrap : version 1.8degv{194,194,4000,85}
@@ -465,11 +467,18 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
    #define DEFAULT_AXIS_STEPS_PER_UNIT   {102,102,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
 #endif
 #ifdef motors18rack
-   #define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {76.2,76.2,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
 #endif
 #ifdef motors09rack
-   #define DEFAULT_AXIS_STEPS_PER_UNIT   {154,154,7400,170}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {153,153,8000,170}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
 #endif
+#ifdef motors18gt2
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+#endif
+#ifdef motors09gt2
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {160,160,8000,170}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+#endif
+
 
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 4, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
