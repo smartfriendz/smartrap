@@ -16,8 +16,8 @@
  //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
   //#define motors18rack // version rack motors 1.8 degres
  //#define motors09rack // version rack motors 0.9 degres
-  //#define motors18gt2 // version rack motors 1.8 degres
-  #define motors18gt2ext7mm // version gt2 motor 1,8 and extruder brass insert 7mm diam
+  #define motors18gt2 // version rack motors 1.8 degres
+  //#define motors18gt2ext7mm // version gt2 motor 1,8 and extruder brass insert 7mm diam
  //#define motors09gt2 // version rack motors 0.9 degres
 // ------ end smartrap easy config
 
