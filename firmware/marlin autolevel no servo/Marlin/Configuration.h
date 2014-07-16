@@ -192,8 +192,8 @@
 // PID settings:
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define BANG_MAX 220 // limits current to nozzle while in bang-bang mode; 255=full current
-#define PID_MAX 220 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define BANG_MAX 190 // limits current to nozzle while in bang-bang mode; 255=full current
+#define PID_MAX 190 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #ifdef PIDTEMP
   //#define PID_DEBUG // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1 // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
@@ -404,7 +404,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #define X_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Z_PROBE_OFFSET_FROM_EXTRUDER 2
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.2 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.5 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
 
   #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
