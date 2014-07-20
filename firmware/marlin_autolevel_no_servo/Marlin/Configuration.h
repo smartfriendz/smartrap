@@ -9,7 +9,7 @@
  #define useEEPROM // just place it here so we don't look in all config file
  #define servoPololu // version with pololu servos. others are inverted angles ?!?!
  //#define LCDreprapdiscount // just place here so we don't look in all config file.
- 
+
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
  //#define motors09 // version 0.9 degres motors. change steps
  //#define motors1848 // version motors 1.8 degres, 48mm long
@@ -45,7 +45,10 @@
 
 // This determines the communication speed of the printer
 // This determines the communication speed of the printer
-//#define BAUDRATE 115200
+
+// Linux hosts support only 115200
+// #define BAUDRATE 115200
+// Windows and Mac can use 250000
 #define BAUDRATE 250000
 
 // This enables the serial port associated to the Bluetooth interface
@@ -576,7 +579,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #endif
 
 #if defined (REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
- #define DOGLCD  
+ #define DOGLCD
  #define U8GLIB_ST7920
  #define REPRAP_DISCOUNT_SMART_CONTROLLER
 #endif
