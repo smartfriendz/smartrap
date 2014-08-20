@@ -5,7 +5,7 @@
 //variabless
 plate_height = 7; // height of all plates
 border = 5; // borders around holes for plates
-rods_r = 4; // the radius of rods. we use diam 8 but ready to use d=6
+rods_r = 3; // the radius of rods. we use diam 8 but ready to use d=6
 M4_bool_r = 2.1; // we can adjust the diam of holes for different printers
 bearing_holder_r = 7.5; // the holes for bearings on plates
 bearing_holder_l = 24;
@@ -18,8 +18,21 @@ zrods_spaceX = 72.88;
 yrods_spaceY = 62.04;
 xrods_spaceX = 42.825;
 
-// ---------  MAIN ----------
-all();
+// ---------  MAIN **************************************
+
+//all();
+
+// testing
+//jhead_arm();
+
+//xend_jhead();
+//translate([0,-12,22.5])
+//jhead_arm();
+
+xend_jhead_proxy();
+
+
+//plate_1();
 
 // draw all
 module all(){
@@ -35,8 +48,22 @@ module all(){
 	translate([0,0,100])
 	xend_jhead();
 }
-// parts
-module base_y()
+
+
+module plate_1(){
+	translate([0,0,0]) rotate([-90,0,0])
+	xend_jhead();
+	translate([90,0,0]) rotate([-90,0,0])
+	jhead_arm();
+
+}
+
+// parts  ****************************************************
+
+
+
+
+module bottom()
 	difference(){		
 		miniround([100,24,plate_height],2);
 	translate([10,-10,-1]) 
@@ -49,27 +76,10 @@ module base_y()
 		cylinder(h=20,r=M4_bool_r);
 	}
 		
-module base_center()
-	difference(){
-		miniround([110,70,plate_height],2);
-		translate([border,border,-1])
-		zrod();
-		translate([border+zrods_spaceX,border,-1])
-		zrod();
-		translate([border,border*2,3])
-		nema_bool();
-		translate([border+42+border,border*2,3])
-		nema_bool();
-		
-	}
-/*
-module base_back()
-	difference(){
-		miniround([60,10,plate_height],2);
-	translate([15,12,4]) rotate([90,0,0])
-		cylinder(h=20,r=M4_bool_r);
-	}
-*/
+
+
+// plate base   ---------------------------------------------
+
 module plate_base()
 	difference(){
 	miniround([100,60,plate_height],2);
@@ -81,6 +91,8 @@ module plate_base()
 	rotate([0,90,0])
 		cylinder(h=bearing_holder_l,r=bearing_holder_r);
 	}
+
+// plate x  -------------------------------------------------
 
 module plate_x()
 	difference(){
@@ -99,6 +111,8 @@ module plate_x()
 		cylinder(h=bearing_holder_l,r=bearing_holder_r);
 	}
 
+// plate y --------------------------------------------------
+
 module plate_y()
 	difference(){
 		miniround([60,40,plate_height],2);
@@ -110,12 +124,135 @@ module plate_y()
 		cylinder(h=bearing_holder_l,r=bearing_holder_r);
 	}
 
+
+
+// xend - jhead type  ----------------------------------------
+
+xend_width = 60;
+xend_pushfit = false;
+
+//xrods_spaceX
+
 module xend_jhead()
 	difference(){
-		miniround([60,22,30]);
-	translate([15,0,0]) rotate([90,0,0])
-		cylinder(h=20,r=rods_r);
+		union(){
+			cube([xend_width,10,30]); //main
+			translate([5,-10,30]) 
+				cube([5,20,16]); // switch support
+			translate([xend_width,10,30]) rotate([90,0,0])
+				cylinder(h=10,r=7); 
+		}
+			translate([xend_width,11,30])  rotate([90,0,0]) 
+					cylinder(h=12,r=1.6);  // hole righ
+			translate([xend_width/2-3,11,0])  rotate([90,0,0]) 
+					cylinder(h=12,r=15);  // hole middle
+			
+			translate([10,11,10])  rotate([90,0,0]) 
+					cylinder(h=12,r=rods_r); // rods hole
+			translate([10+xrods_spaceX,11,10])  rotate([90,0,0]) 
+					cylinder(h=12,r=rods_r); // rods hole
+			translate([0,-10,30])  rotate([0,90,0]) 
+					cylinder(h=12,r=10); // switch support form
+
+
 	}
+
+// xend_jhead_proxy  : new end with proxymity sensor.
+
+proxy_d = 18;
+
+
+module xend_jhead_proxy(){
+	difference(){
+		union(){
+			cube([xend_width,10,30]); //main
+			
+			translate([22,-10,20]) 
+				cube([16,10,18]); // head support
+
+			// support top for bowden
+			if(!xend_pushfit){
+				translate([33,-8,21]) 
+				cube([10,8,4]);
+			}
+
+			// two middle cyl for head attach
+			translate([30,10,10]) rotate([90,0,0])
+				cylinder(h=10,r=5); 
+			translate([46,10,10]) rotate([90,0,0])
+				cylinder(h=10,r=5);
+			
+			
+		}
+			
+		translate([xend_width/2-3,11,0])  rotate([90,0,0]) 
+				cylinder(h=12,r=15);  // hole middle
+		
+		translate([10,11,10])  rotate([90,0,0]) 
+				cylinder(h=12,r=rods_r); // rods hole
+		translate([10+xrods_spaceX,11,10])  rotate([90,0,0]) 
+				cylinder(h=12,r=rods_r); // rods hole
+
+
+	}
+}
+
+
+// jhead arm   ----------------------------------------------
+
+jha_height = 7;
+
+
+module jhead_arm()
+	difference(){
+		union(){
+			cube([xend_width,10,jha_height]); //main
+			translate([30,0,jha_height]) 
+				cube([16,10,18]); // head support
+			translate([xend_width,10,jha_height]) rotate([90,0,0])
+				cylinder(h=10,r=7); // right cyl form
+			// two middle cyl for head attach
+			translate([30,10,10]) rotate([90,0,0])
+				cylinder(h=10,r=5); 
+			translate([46,10,10]) rotate([90,0,0])
+				cylinder(h=10,r=5);
+			// support top for bowden
+			if(!xend_pushfit){
+				translate([33,-8,21]) 
+				cube([10,8,4]);
+			}
+			
+				
+		}
+		// three cyl for main hole vertical . 38 = 30 + 16/2
+		union() {
+			translate([38,0,-1]) 
+				cylinder(h=10.1,r=6);
+			translate([38,0,9]) 
+				cylinder(h=4.1,r=5);
+			translate([38,0,13]) 
+				cylinder(h=8,r=6);
+		}
+		 // cyl + cube for bowden support hole
+		union() {
+			translate([38,0,20]) 
+				cylinder(h=10.1,r=2);
+			translate([36,-10,20]) 
+			cube([4,10,5.1]);
+		}
+		translate([xend_width,11,7])  rotate([90,0,0]) 
+				cylinder(h=12,r=1.6);  // hole righ
+	}
+
+// jhead attach  -------------------------------------------------------
+
+module jhead_attach()
+	{
+
+	}
+
+
+//   xend  back -------------------------------------------------------
 
 module xend_back()
 	difference(){
@@ -126,6 +263,8 @@ module xend_back()
 		cylinder(h=20,r=2.1);
 	}
 
+//   yend front-------------------------------------------------------
+
 module yend_front()
 	difference(){
 		miniround([100,60,plate_height],2);
@@ -135,6 +274,8 @@ module yend_front()
 		cylinder(h=20,r=2.1);
 	}
 
+//   tend  back -------------------------------------------------------
+
 module yend_back()
 	difference(){
 		miniround([100,60,plate_height],2);
@@ -143,6 +284,8 @@ module yend_back()
 	translate([15,28,4]) rotate([90,0,0])
 		cylinder(h=20,r=2.1);
 	}
+
+
 
 module bearingsholder_x()
 	difference(){
@@ -183,11 +326,12 @@ module fishingline_tensioner()
 
 
 
+
 // lib -----------------------------
 
 module miniround(size, radius)
 {
-$fn=8;
+$fn=6;
 x = size[0]-radius/2;
 y = size[1]-radius/2;
 

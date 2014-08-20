@@ -8,7 +8,7 @@
 
  #define useEEPROM // just place it here so we don't look in all config file
  #define servoPololu // version with pololu servos. others are inverted angles ?!?!
- //#define LCDreprapdiscount // just place here so we don't look in all config file.
+ #define LCDreprapdiscount // just place here so we don't look in all config file.
  
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
  //#define motors09 // version 0.9 degres motors. change steps
@@ -45,8 +45,8 @@
 
 // This determines the communication speed of the printer
 // This determines the communication speed of the printer
-//#define BAUDRATE 115200
-#define BAUDRATE 250000
+#define BAUDRATE 115200
+//#define BAUDRATE 250000
 
 // This enables the serial port associated to the Bluetooth interface
 //#define BTENABLED              // Enable BT interface on AT90USB devices
@@ -192,8 +192,8 @@
 // PID settings:
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define BANG_MAX 190 // limits current to nozzle while in bang-bang mode; 255=full current
-#define PID_MAX 190 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define BANG_MAX 255 // limits current to nozzle while in bang-bang mode; 255=full current
+#define PID_MAX 255 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #ifdef PIDTEMP
   //#define PID_DEBUG // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1 // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
@@ -208,6 +208,11 @@
     #define  DEFAULT_Kp 22.2
     #define  DEFAULT_Ki 1.08
     #define  DEFAULT_Kd 114
+    
+// jheadlite
+    //#define  DEFAULT_Kp 2560
+    //#define  DEFAULT_Ki 64
+    //#define  DEFAULT_Kd 4096
 
 // MakerGear
 //    #define  DEFAULT_Kp 7.0
@@ -324,9 +329,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DISABLE_E false // For all extruders
 
 #define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true
-#define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
-#define INVERT_Z_DIR true     // for Mendel set to false, for Orca set to true
-#define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
+#define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
+#define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
+#define INVERT_E0_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E2_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
 
@@ -404,7 +409,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #define X_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Z_PROBE_OFFSET_FROM_EXTRUDER 2
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.5 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.1 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
 
   #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
