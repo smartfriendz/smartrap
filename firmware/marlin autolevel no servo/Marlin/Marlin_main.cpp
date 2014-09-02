@@ -867,6 +867,7 @@ static void set_bed_level_equation_3pts(float z_at_pt_1, float z_at_pt_2, float 
 
     // smartrap modif: we add some delta on 3rd point because of smartrap's special design : x is porte a faux and there's a diff between probe and print
     z_at_pt_3 += Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X;
+    z_at_pt_2 +=Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_Y;
 
     vector_3 pt1 = vector_3(ABL_PROBE_PT_1_X, ABL_PROBE_PT_1_Y, z_at_pt_1);
     vector_3 pt2 = vector_3(ABL_PROBE_PT_2_X, ABL_PROBE_PT_2_Y, z_at_pt_2);

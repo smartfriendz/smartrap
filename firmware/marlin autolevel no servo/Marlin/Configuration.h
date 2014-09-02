@@ -16,7 +16,7 @@
  //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
   //#define motors18rack // version rack motors 1.8 degres
  //#define motors09rack // version rack motors 0.9 degres
-  #define motors18gt2 // version rack motors 1.8 degres
+  //#define motors18gt2 // version rack motors 1.8 degres
   //#define motors18gt2ext7mm // version gt2 motor 1,8 and extruder brass insert 7mm diam
  //#define motors09gt2 // version rack motors 0.9 degres
 // ------ end smartrap easy config
@@ -150,7 +150,7 @@
 // 147 is Pt100 with 4k7 pullup
 // 110 is Pt100 with 1k pullup (non standard)
 
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 7
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_BED 1
@@ -193,7 +193,7 @@
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
 #define BANG_MAX 255 // limits current to nozzle while in bang-bang mode; 255=full current
-#define PID_MAX 255 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define PID_MAX 225 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #ifdef PIDTEMP
   //#define PID_DEBUG // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1 // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
@@ -304,7 +304,7 @@
 // The pullups are needed if you directly connect a mechanical endswitch between the signal and ground pins.
 const bool X_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
 const bool Y_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Z_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+const bool Z_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
 const bool X_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
 const bool Y_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
 const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
@@ -382,7 +382,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
     // set the rectangle in which to probe
     #define LEFT_PROBE_BED_POSITION 10
-    #define RIGHT_PROBE_BED_POSITION 100
+    #define RIGHT_PROBE_BED_POSITION 140
     #define BACK_PROBE_BED_POSITION 140
     #define FRONT_PROBE_BED_POSITION 10
 
@@ -398,9 +398,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
       #define ABL_PROBE_PT_1_X 10
       #define ABL_PROBE_PT_1_Y 10
       #define ABL_PROBE_PT_2_X 10
-      #define ABL_PROBE_PT_2_Y 130
-      #define ABL_PROBE_PT_3_X 90
-      #define ABL_PROBE_PT_3_Y 70
+      #define ABL_PROBE_PT_2_Y 140
+      #define ABL_PROBE_PT_3_X 140
+      #define ABL_PROBE_PT_3_Y 140
 
   #endif // AUTO_BED_LEVELING_GRID
 
@@ -408,9 +408,10 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   // these are the offsets to the probe relative to the extruder tip (Hotend - Probe)
   #define X_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER 2
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.1 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
-
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -4.3
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_Y 0
+  
   #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
 
@@ -463,6 +464,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define HOMING_FEEDRATE {50*60, 50*60, 4*60, 0}  // set the homing speeds (mm/min)
 
 // default settings - smartrap: uses define on top for diferent motors config
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,160,8000,170}
 #ifdef motors09
   #define DEFAULT_AXIS_STEPS_PER_UNIT   {394,394,8000,170}  // smartrap : version 0.9 deg. 1/16 {382,382,7400,170}
 #endif
