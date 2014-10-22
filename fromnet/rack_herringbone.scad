@@ -14,15 +14,15 @@ pi=3.1415926535897932384626433832795;
 innerRadius=2;//shaft radius, in mm
 borders=2;//how thick should the borders around the central "shaft" be, in mm
 diametralPitch=12;
-numberOfTeeth=38;
+numberOfTeeth=20;
 pressureAngle=20*pi/180;
 centerAngle=25;//angle at center of teeth
 
 
 //example usage
-rack(innerRadius,borders,diametralPitch,numberOfTeeth,pressureAngle,centerAngle);
+//rack(innerRadius,borders,diametralPitch,numberOfTeeth,pressureAngle,centerAngle);
 
-
+demo_gear([10,10,10],diametralPitch);
 
 module rack(innerRadius,borders,P,N,PA,CA)
 {
@@ -71,7 +71,7 @@ module rack(innerRadius,borders,P,N,PA,CA)
 	echo("Total height",supportSize);
 
 	
-	rotate([90,90,0])
+	rotate([0,0,0])
 	{
 	translate([-supportSize/2,supportSize/2,0])
 	{
