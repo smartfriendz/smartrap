@@ -854,7 +854,7 @@ static void set_bed_level_equation_lsq(double *plane_equation_coefficients)
     current_position[Z_AXIS] = corrected_position.z;
 
     // but the bed at 0 so we don't go below it.
-    current_position[Z_AXIS] = zprobe_zoffset; // in the lsq we reach here after raising the extruder due to the loop structure
+    current_position[Z_AXIS] = -zprobe_zoffset; // in the lsq we reach here after raising the extruder due to the loop structure
 
     plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
 }
@@ -867,6 +867,7 @@ static void set_bed_level_equation_3pts(float z_at_pt_1, float z_at_pt_2, float 
 
     // smartrap modif: we add some delta on 3rd point because of smartrap's special design : x is porte a faux and there's a diff between probe and print
     z_at_pt_3 += Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X;
+    z_at_pt_2 +=Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_Y;
 
     vector_3 pt1 = vector_3(ABL_PROBE_PT_1_X, ABL_PROBE_PT_1_Y, z_at_pt_1);
     vector_3 pt2 = vector_3(ABL_PROBE_PT_2_X, ABL_PROBE_PT_2_Y, z_at_pt_2);
@@ -885,7 +886,7 @@ static void set_bed_level_equation_3pts(float z_at_pt_1, float z_at_pt_2, float 
     current_position[Z_AXIS] = corrected_position.z;
 
     // put the bed at 0 so we don't go below it.
-    current_position[Z_AXIS] = zprobe_zoffset;
+    current_position[Z_AXIS] = -zprobe_zoffset;
 
     plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
 
@@ -997,13 +998,13 @@ static float probe_pt(float x, float y, float z_before) {
   do_blocking_move_to(current_position[X_AXIS], current_position[Y_AXIS], z_before);
   do_blocking_move_to(x - X_PROBE_OFFSET_FROM_EXTRUDER, y - Y_PROBE_OFFSET_FROM_EXTRUDER, current_position[Z_AXIS]);
 
-  engage_z_probe();   // Engage Z Servo endstop if available
+  //engage_z_probe();   // Engage Z Servo endstop if available
   run_z_probe();
   float measured_z = current_position[Z_AXIS];
 
   
     //do_blocking_move_to(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]+Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT);
-    retract_z_probe();
+    //retract_z_probe();
     //do_blocking_move_to(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]-Z_RAISE_BETWEEN_PROBINGS_BEFORE_RETRACT);
   
 

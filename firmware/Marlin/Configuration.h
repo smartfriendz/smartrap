@@ -11,10 +11,14 @@
  //#define LCDreprapdiscount // just place here so we don't look in all config file.
  
  // motors definitions - ! AT LEAST ONE SHOULD BE ON / UNCOMMENTED
- #define motors09 // version 0.9 degres motors. change steps
+ //#define motors09 // version 0.9 degres motors. change steps
  //#define motors1848 // version motors 1.8 degres, 48mm long
  //#define motors1840 // version motors 1.8 degres, 40mm long . this one has a shaft adaptor and changes steps
-
+  //#define motors18rack // version rack motors 1.8 degres
+ //#define motors09rack // version rack motors 0.9 degres
+  #define motors18gt2 // version rack motors 1.8 degres
+  //#define motors18gt2ext7mm // version gt2 motor 1,8 and extruder brass insert 7mm diam
+ //#define motors09gt2 // version rack motors 0.9 degres
 // ------ end smartrap easy config
 
 // This configuration file contains the basic settings.
@@ -32,7 +36,7 @@
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
-#define STRING_CONFIG_H_AUTHOR "(smartfriendz, smartrap1.05)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(smartfriendz, smartrap1.06)" // Who made the changes.
 
 // SERIAL_PORT selects which serial port should be used for communication with the host.
 // This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -41,6 +45,7 @@
 
 // This determines the communication speed of the printer
 // This determines the communication speed of the printer
+//#define BAUDRATE 115200
 #define BAUDRATE 250000
 
 // This enables the serial port associated to the Bluetooth interface
@@ -145,7 +150,7 @@
 // 147 is Pt100 with 4k7 pullup
 // 110 is Pt100 with 1k pullup (non standard)
 
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 7
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_BED 1
@@ -187,8 +192,8 @@
 // PID settings:
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define BANG_MAX 220 // limits current to nozzle while in bang-bang mode; 255=full current
-#define PID_MAX 220 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define BANG_MAX 255 // limits current to nozzle while in bang-bang mode; 255=full current
+#define PID_MAX 255 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #ifdef PIDTEMP
   //#define PID_DEBUG // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1 // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
@@ -203,6 +208,11 @@
     #define  DEFAULT_Kp 22.2
     #define  DEFAULT_Ki 1.08
     #define  DEFAULT_Kd 114
+    
+// jheadlite
+    //#define  DEFAULT_Kp 2560
+    //#define  DEFAULT_Ki 64
+    //#define  DEFAULT_Kd 4096
 
 // MakerGear
 //    #define  DEFAULT_Kp 7.0
@@ -233,7 +243,7 @@
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
 // setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
 // so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
-#define MAX_BED_POWER 80 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER 130 // limits duty cycle to bed; 255=full current
 
 #ifdef PIDTEMPBED
 //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
@@ -285,7 +295,7 @@
 #ifdef ENDSTOPPULLUPS
   #define ENDSTOPPULLUP_XMAX
   #define ENDSTOPPULLUP_YMAX
-  //#define ENDSTOPPULLUP_ZMAX
+  #define ENDSTOPPULLUP_ZMAX
   #define ENDSTOPPULLUP_XMIN
   #define ENDSTOPPULLUP_YMIN
   #define ENDSTOPPULLUP_ZMIN
@@ -320,7 +330,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 #define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true
 #define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
-#define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
+#define INVERT_Z_DIR true     // for Mendel set to false, for Orca set to true
 #define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E2_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
@@ -335,11 +345,11 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
 
 // Travel limits after homing
-#define X_MAX_POS 150
+#define X_MAX_POS 200
 #define X_MIN_POS 0
-#define Y_MAX_POS 150
+#define Y_MAX_POS 200
 #define Y_MIN_POS 0
-#define Z_MAX_POS 130
+#define Z_MAX_POS 160
 #define Z_MIN_POS 0
 
 #define X_MAX_LENGTH (X_MAX_POS - X_MIN_POS)
@@ -371,10 +381,10 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #ifdef AUTO_BED_LEVELING_GRID
 
     // set the rectangle in which to probe
-    #define LEFT_PROBE_BED_POSITION 30
-    #define RIGHT_PROBE_BED_POSITION 110
-    #define BACK_PROBE_BED_POSITION 110
-    #define FRONT_PROBE_BED_POSITION 30
+    #define LEFT_PROBE_BED_POSITION 10
+    #define RIGHT_PROBE_BED_POSITION 140
+    #define BACK_PROBE_BED_POSITION 140
+    #define FRONT_PROBE_BED_POSITION 10
 
      // set the number of grid points per dimension
      // I wouldn't see a reason to go above 3 (=9 probing points on the bed)
@@ -385,12 +395,12 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
     // with no grid, just probe 3 arbitrary points.  A simple cross-product
     // is used to esimate the plane of the print bed
 
-      #define ABL_PROBE_PT_1_X 10
-      #define ABL_PROBE_PT_1_Y 10
-      #define ABL_PROBE_PT_2_X 10
-      #define ABL_PROBE_PT_2_Y 100
-      #define ABL_PROBE_PT_3_X 100
-      #define ABL_PROBE_PT_3_Y 55
+      #define ABL_PROBE_PT_1_X 3
+      #define ABL_PROBE_PT_1_Y 3
+      #define ABL_PROBE_PT_2_X 3
+      #define ABL_PROBE_PT_2_Y 140
+      #define ABL_PROBE_PT_3_X 140
+      #define ABL_PROBE_PT_3_Y 140
 
   #endif // AUTO_BED_LEVELING_GRID
 
@@ -398,9 +408,10 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   // these are the offsets to the probe relative to the extruder tip (Hotend - Probe)
   #define X_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER 2.2
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.5 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
-
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER 0
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.3 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_Y 0
+  
   #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
 
@@ -453,14 +464,30 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define HOMING_FEEDRATE {50*60, 50*60, 4*60, 0}  // set the homing speeds (mm/min)
 
 // default settings - smartrap: uses define on top for diferent motors config
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,160,8000,170}
 #ifdef motors09
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   {394,394,7400,170}  // smartrap : version 0.9 deg. 1/16 {382,382,7400,170}
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   {394,394,8000,170}  // smartrap : version 0.9 deg. 1/16 {382,382,7400,170}
 #endif
 #ifdef motors1848
   #define DEFAULT_AXIS_STEPS_PER_UNIT   {194,194,4000,85}  // smartrap : version 1.8degv{194,194,4000,85}
 #endif
 #ifdef motors1840
-   #define DEFAULT_AXIS_STEPS_PER_UNIT   {99,99,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {102,102,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+#endif
+#ifdef motors18rack
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {76.2,76.2,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+#endif
+#ifdef motors09rack
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {153,153,8000,170}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+#endif
+#ifdef motors18gt2
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,85}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+#endif
+#ifdef motors09gt2
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {160,160,8000,170}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
+#endif
+#ifdef motors18gt2ext7mm
+   #define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,140}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
 #endif
 
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 4, 25}    // (mm/sec)
