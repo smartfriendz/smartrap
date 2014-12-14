@@ -45,8 +45,8 @@
 
 // This determines the communication speed of the printer
 // This determines the communication speed of the printer
-//#define BAUDRATE 115200
-#define BAUDRATE 250000
+#define BAUDRATE 115200
+//#define BAUDRATE 250000
 
 // This enables the serial port associated to the Bluetooth interface
 //#define BTENABLED              // Enable BT interface on AT90USB devices
@@ -395,12 +395,12 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
     // with no grid, just probe 3 arbitrary points.  A simple cross-product
     // is used to esimate the plane of the print bed
 
-      #define ABL_PROBE_PT_1_X 3
-      #define ABL_PROBE_PT_1_Y 3
-      #define ABL_PROBE_PT_2_X 3
-      #define ABL_PROBE_PT_2_Y 140
-      #define ABL_PROBE_PT_3_X 140
-      #define ABL_PROBE_PT_3_Y 140
+      #define ABL_PROBE_PT_1_X 10
+      #define ABL_PROBE_PT_1_Y 20
+      #define ABL_PROBE_PT_2_X 10
+      #define ABL_PROBE_PT_2_Y 160
+      #define ABL_PROBE_PT_3_X 120
+      #define ABL_PROBE_PT_3_Y 80
 
   #endif // AUTO_BED_LEVELING_GRID
 
@@ -408,14 +408,14 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   // these are the offsets to the probe relative to the extruder tip (Hotend - Probe)
   #define X_PROBE_OFFSET_FROM_EXTRUDER 0
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER 0
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER 2
   #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_X 0.3 // smartrap: special quantic error mesurement from porte a faux design (see marlin.cpp)
   #define Z_PROBE_OFFSET_FROM_EXTRUDER_DELTA_Y 0
   
   #define Z_RAISE_BEFORE_HOMING 5       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
 
-  #define XY_TRAVEL_SPEED 6000         // X and Y axis travel speed between probes, in mm/min
+  #define XY_TRAVEL_SPEED 4000         // X and Y axis travel speed between probes, in mm/min
 
   #define Z_RAISE_BEFORE_PROBING 5    //How much the extruder will be raised before traveling to the first probing point.
   #define Z_RAISE_BETWEEN_PROBINGS 5  //How much the extruder will be raised when traveling from between next probing points
@@ -461,7 +461,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 //// MOVEMENT SETTINGS
 #define NUM_AXIS 4 // The axis order in all axis related arrays is X, Y, Z, E
-#define HOMING_FEEDRATE {40*60, 40*60, 3*60, 0}  // set the homing speeds (mm/min)
+#define HOMING_FEEDRATE {60*60, 60*60, 5*60, 0}  // set the homing speeds (mm/min)
 
 // default settings - smartrap: uses define on top for diferent motors config
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,160,8000,170}
@@ -490,8 +490,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
    #define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,140}  // smartrap : version 1.8degv{194,194,4000,85} robotdigg.shaft adaptor,fishline big
 #endif
 
-#define DEFAULT_MAX_FEEDRATE          {400, 400, 2, 25}    // (mm/sec)
-#define DEFAULT_MAX_ACCELERATION      {7000,7000,80,8000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
+#define DEFAULT_MAX_FEEDRATE          {400, 400, 3, 25}    // (mm/sec)
+#define DEFAULT_MAX_ACCELERATION      {7000,7000,100,8000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
 #define DEFAULT_ACCELERATION          3000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000   // X, Y, Z and E max acceleration in mm/s^2 for retracts

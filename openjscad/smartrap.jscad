@@ -95,7 +95,7 @@ function xend_jhead(){
 
 }
 function xend_Jhead_arm(){
-    var extDiam=15;
+    var extDiam=16;
     var intDiam=12;
     var intDiamHeight=5;
     var depth = 10;
