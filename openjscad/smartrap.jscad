@@ -23,8 +23,8 @@ function getParameterDefinitions() {
         caption: 'Show:', 
         type: 'choice', 
         values: [0,1,2,3,4,5,6,7,8,9,10], 
-        initial: 0, 
-        captions: ["All printer assembly", "printed parts plate","EndX Jhead","","","","","","","",""]},
+        initial: 3, 
+        captions: ["All printer assembly", "printed parts plate","EndX Jhead","EndX Jhead inductive","","","","","","",""]},
      { name: '_globalResolution', caption: 'resolution (16, 24, 32 for export)', type: 'int', initial: 8 }
     
   ];
@@ -155,7 +155,64 @@ function xend_Jhead_attach(){
          cylinder({r:extDiam/2,h:8,fn:_globalResolution}).translate([width/2,0,10+intDiamHeight])
 
     );  
-    
+    }
+
+function xend_jhead_inductive(){
+    var width=Xaxiswidth;
+    var height = 20;
+    var depth = 10;
+    var spaceZstopHoles = 19;
+    var extDiam=15;
+    var intDiam=12;
+    var intDiamHeight=5;
+    var barHeight = 6;
+
+    return difference(
+        union(
+            //main low
+            cube([width+5,depth,height]),
+            // support for gt2 holder
+            cube([10,depth,10]).translate([40,0,height/2]),
+            // support arm 
+            cube([10,depth,5]).translate([width+5,0,0]),
+            //rods form
+            cylinder({r:_XYrodsDiam+2,h:depth,fn:_globalResolution}).rotateX(-90).translate([0,0,6]),
+            cylinder({r:_XYrodsDiam+2,h:depth,fn:_globalResolution}).rotateX(-90).translate([width,0,6]),
+             // support for endstopX
+             slottedHole(5,15,4).rotateX(-90).translate([width,depth-4,0])
+             
+            
+        ),
+        //rods
+        cylinder({r:_XYrodsDiam/2+0.1,h:depth,fn:_globalResolution}).rotateX(-90).translate([0,3,6]),
+        cylinder({r:_XYrodsDiam/2+0.1,h:depth,fn:_globalResolution}).rotateX(-90).translate([width,3,6]),
+        cylinder({r:_XYrodsDiam/2-1,h:5,fn:_globalResolution}).rotateX(-90).translate([0,0,6]),
+        cylinder({r:_XYrodsDiam/2-1,h:5,fn:_globalResolution}).rotateX(-90).translate([width,-1,6]),
+        // jhead holes *3
+         cylinder({r:extDiam/2,h:10,fn:_globalResolution}).translate([width/2,-1,0]),
+         cylinder({r:intDiam/2,h:intDiamHeight,fn:_globalResolution}).translate([width/2,-1,10]),
+         cylinder({r:extDiam/2,h:8,fn:_globalResolution}).translate([width/2,-1,10+intDiamHeight]),
+        // gt2 attach
+        Gt2HolderBool().rotateZ(-90).translate([45,10,10]),
+        // hole screw for support inductive
+        cylinder({r:1.6,h:depth,fn:_globalResolution}).translate([width+11,5,0]),
+        //hole middle - save material
+        cylinder({r:18,h:depth,fn:_globalResolution}).rotateX(-90).translate([width/2,0,-15]),
+        //for 2 screws attach
+        cylinder({r:1.4,h:depth,fn:_globalResolution}).rotateX(-90).translate([width/2-endxJheadAttachHolesWidth/2,0,11]),
+        cylinder({r:1.4,h:depth,fn:_globalResolution}).rotateX(-90).translate([width/2+endxJheadAttachHolesWidth/2,0,11])
+
+    );
+
+}
+
+function support_inductive_sensor(){
+    return difference(
+        union(
+
+        )
+    );
+
 }
 
 function plateX(){
@@ -301,13 +358,16 @@ function main(params){
             ];
         break;
         case 1:
-
+            
         break;
         case 2:
             //res = xend_Jhead_arm();
         break;
         case 3:
-
+            res = [
+                //xend_Jhead_attach().translate([0,0,5]),
+                xend_jhead_inductive().translate([16,0,4])
+            ];
         break;
         case 4:
 
