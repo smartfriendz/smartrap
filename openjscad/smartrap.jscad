@@ -12,21 +12,9 @@ date: 11 / 2014
 
 function getParameterDefinitions() {
   return [ 
-  
-    { name: '_printableWidth', caption: 'Print width:', type: 'int', initial: 200 },
-    { name: '_printableHeight', caption: 'Print height :', type: 'int', initial: 150 },
-    { name: '_printableDepth', caption: 'Print depth :', type: 'int', initial: 200 },
-    { name: '_XYrodsDiam', caption: 'X Y Rods diameter (6 or 8 ):', type: 'int', initial: 6},
+    { name: '_XYrodsDiam', caption: 'X Y Rods diameter (6 or 8 ):', type: 'int', initial: 8},
     { name: '_ZrodsDiam', caption: 'Z Rods diameter (6 or 8 ):', type: 'int', initial: 8},
-    { 
-        name: '_output', 
-        caption: 'Show:', 
-        type: 'choice', 
-        values: [0,1,2,3,4,5,6,7,8,9,10], 
-        initial: 3, 
-        captions: ["All printer assembly", "printed parts plate","EndX Jhead","EndX Jhead inductive","","","","","","",""]},
-     { name: '_globalResolution', caption: 'resolution (16, 24, 32 for export)', type: 'int', initial: 8 }
-    
+    { name: '_globalResolution', caption: 'resolution (16, 24, 32 for export)', type: 'int', initial: 8 }    
   ];
 }
 
@@ -206,39 +194,6 @@ function xend_jhead_inductive(){
 
 }
 
-function support_inductive_sensor(){
-    return difference(
-        union(
-
-        )
-    );
-
-}
-
-function plateX(){
-
-}
-
-function endXBack(){
-
-}
-
-function plateBase(){
-
-}
-
-function plateY(){
-
-}
-
-function endY(){
-
-}
-
-function extruder_dd(){
-
-}
-
 
 // lib
 
@@ -254,17 +209,6 @@ function _axis(){
         cube({size:[10,1,1]}).setColor(1,0,0),
         cube({size:[1,10,1]}).setColor(0,1,0),
         cube({size:[1,1,10]}).setColor(0,0,1)
-        );
-}
-
-function nemaHole(){
-    var offset = (_nemaXYZ==35)?13:15.5;
-        return union(
-            cylinder({r:11.1,h:40}),
-            cylinder({r:1.6,h:40,fn:_globalResolution}).translate([-offset,-offset,0]),
-            cylinder({r:1.6,h:40,fn:_globalResolution}).translate([offset,-offset,0]),
-            cylinder({r:1.6,h:40,fn:_globalResolution}).translate([-offset,offset,0]),
-            cylinder({r:1.6,h:40,fn:_globalResolution}).translate([offset,offset,0])
         );
 }
 
@@ -347,55 +291,11 @@ function main(params){
     if(_ZrodsDiam==8){ _ZlmDiam = 15;}
 
 
-    var res=null;
-
-    switch(output){
-        case 0:
-            res = [
-                xend_Jhead_arm().translate([0,0,5]),
-                xend_Jhead_attach().translate([0,0,5]),
-                xend_jhead().translate([27,20,0])
-            ];
-        break;
-        case 1:
-            
-        break;
-        case 2:
-            //res = xend_Jhead_arm();
-        break;
-        case 3:
-            res = [
-                //xend_Jhead_attach().translate([0,0,5]),
-                xend_jhead_inductive().translate([16,0,4])
-            ];
-        break;
-        case 4:
-
-        break;
-        case 5:
-
-        break;
-        case 6:
-
-        break;
-        case 7:
-
-        break;
-        case 8:
-
-        break;
-        case 9:
-
-        break;
-        case 10:
-
-        break;
-        default:
-
-        break;
-    }
-
-    return res;
-
+    return [
+        xend_Jhead_arm().translate([0,0,1]),
+        xend_Jhead_attach().translate([0,0,-4]),
+        xend_jhead().rotateX(180).translate([28,28,31]),
+        xend_jhead_inductive().rotateX(180).translate([16,46,21])
+    ];
 
 }
